@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd /$HOME
 
 
 #user prompts
@@ -78,7 +78,7 @@ dnf upgrade -y
 #remove unneeded programs
 dnf remove -y totem totem-plugins #gnome videos
 dnf remove -y cheese
-
+rm -r $HOME/.config/totem
 
 
 #add repos
@@ -238,10 +238,12 @@ cd $HOME
 
 #configure programs
 
+#mpv
+cp $HOME/FedoraInitialSetup/configs/mpv/*.conf $HOME/.config/mpv
+wget https://github.com/bloc97/Anime4K/releases/download/3.1/Anime4K_v3.1.zip
+mkdir $HOME/.config/mpv/shaders
+unzip Anime4K_v3.1.zip -d $HOME/.config/mpv/shaders
+rm Anime4K_v3.1.zip
 
-
-
-
-
-
+#gnome terminal
 
