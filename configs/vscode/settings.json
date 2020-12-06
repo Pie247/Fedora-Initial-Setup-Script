@@ -1,0 +1,9 @@
+{
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "'CaskaydiaCove NF','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "window.zoomLevel": 0
+}
