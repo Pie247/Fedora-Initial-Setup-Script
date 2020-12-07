@@ -97,7 +97,7 @@ then
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 fi
 
-if [ $vscode == 1]
+if [ $vscode == 1 ]
 then
     #VSCode
     rpm --import https://packages.microsoft.com/keys/microsoft.asc
