@@ -163,10 +163,14 @@ fi
 
 #install development tools
 dnf install -y @development-tools
+dnf install -y alacritty
 dnf install -y vim
 dnf install -y emacs
 #emacs plugins go here
+#shell
+dnf install -y powerline vim-powerline tmux-powerline
 dnf install -y zsh
+dnf install -y lsd
 dnf install -y util-linux-user #needed to change shell to zsh
 if [ $vscode == 1 ]
 then
@@ -197,10 +201,12 @@ fi
 
 
 #install misc. programs
-dnf install mpv
-dnf install vlc
-dnf install qbittorrent
-dnf install evolution
+dnf install -y mpv
+dnf install -y vlc
+dnf install -y qbittorrent
+dnf install -y evolution
+dnf install -y gnome-shell-extension-gsconnect
+dnf install -y gnome-tweaks
 
 if [ $nonfree == 'y' ] || [ $nonfree == 'y' ]
 then
@@ -234,16 +240,62 @@ cd "$HOME/.fonts/JetBrains Mono/"
 rm *Windows*
 cd $HOME
 
+#configure gnome
+
+#desktop
+
+#display
+gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+
+#power
+gsettings set org.gnome.desktop.session idle-delay "uint32 0"
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 3600
+
+#keyboard and mouse
+gsettings set org.gnome.desktop.peripherals.mouse accel-profile "flat"
+gsettings set org.gnome.desktop.peripherals.touchpad click-method "areas"
+
+#themes and fonts
+gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+gsettings set org.gnome.desktop.interface monospace-font-name "CaskaydiaCove Nerd Font Book 10"
+
+#top bar
+gsettings set org.gnome.desktop.interface show-battery-percentage true
+
+#favorites (unsure how)
+
+#world clocks (unsure how)
+
+#terminal
+
 
 
 #configure programs
 
 #mpv
-cp $HOME/FedoraInitialSetup/configs/mpv/*.conf $HOME/.config/mpv
+wget -P $HOME/.config/mpv https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/mpv/input.conf https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/mpv/mpv.conf
+
+https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/vscode/settings.json
+mv input.conf mpv.conf $HOME/.config/mpv
 wget https://github.com/bloc97/Anime4K/releases/download/3.1/Anime4K_v3.1.zip
 mkdir $HOME/.config/mpv/shaders
 unzip Anime4K_v3.1.zip -d $HOME/.config/mpv/shaders
 rm Anime4K_v3.1.zip
 
-#gnome terminal
+#vscode or vscodium
+if [ $vscode == 1 ]
+then
+wget -P $HOME/.config/Code/User https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/vscode/settings.json
+else
+#might not work, need to test
+wget -P $HOME/.config/Codium/User https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/vscodium/settings.json
+fi
+
+#shell
+chsh -s $(which zsh) #change default shell to zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" #install oh-my-zsh
+git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k #install powerlevel10k
+wget -P $HOME https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/zsh/.zshrc \ 
+https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/zsh/.p10k.zsh #download configs
 
