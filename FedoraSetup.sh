@@ -56,7 +56,7 @@ fi
 if [ $nonfree == 1 ]
 then
     vscode='a'
-    until [ $vscode == 1 ] || [ $vscode == 2]
+    until [ $vscode == 1 ] || [ $vscode == 2 ]
     do
         read -p "Install VSCode or VSCodium? [1/2]: " vscode
     done
@@ -125,7 +125,7 @@ fi
 #install software
 
 #install programming languages
-if [ $languages == 'y' ] || [ $languages == 'Y']
+if [ $languages == 'y' ] || [ $languages == 'Y' ]
 then
     
     #install rust
@@ -140,7 +140,7 @@ then
     dnf install -y ruby-devel
 fi
 
-if [ $rust == 'y' ] || [ $rust == 'Y']
+if [ $rust == 'y' ] || [ $rust == 'Y' ]
 then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o temp.sh
     chmod 744 temp.sh
@@ -163,15 +163,23 @@ fi
 
 #install development tools
 dnf install -y @development-tools
-dnf install -y alacritty
 dnf install -y vim
 dnf install -y emacs
 #emacs plugins go here
 #shell
-dnf install -y powerline vim-powerline tmux-powerline
 dnf install -y zsh
-dnf install -y lsd
 dnf install -y util-linux-user #needed to change shell to zsh
+dnf install -y lsd
+
+pythonVersion="3.9"
+pip install wheel
+pip install powerline-status
+mkdir $HOME/.config/powerline
+mkdir $HOME/.local/lib/python$pythonVersion/site-packages/scripts
+cp $HOME/.local/bin/powerline-config $HOME/.config/powerline
+cp $HOME/.local/bin/powerline-config $HOME/.local/lib/python$pythonVersion/site-packages/scripts
+cp $HOME/.local/bin/powerline-config $HOME/.cargo/bin
+
 if [ $vscode == 1 ]
 then
     dnf install -y code
@@ -205,8 +213,10 @@ dnf install -y mpv
 dnf install -y vlc
 dnf install -y qbittorrent
 dnf install -y evolution
+flatpak install -y flathub org.raspberrypi.rpi-imager 
 dnf install -y gnome-shell-extension-gsconnect
 dnf install -y gnome-tweaks
+dnf install -y gnome-extensions-app 
 
 if [ $nonfree == 'y' ] || [ $nonfree == 'y' ]
 then
@@ -249,8 +259,8 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
 #power
 gsettings set org.gnome.desktop.session idle-delay "uint32 0"
-gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
-gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 3600
+#gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
+#gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 3600
 
 #keyboard and mouse
 gsettings set org.gnome.desktop.peripherals.mouse accel-profile "flat"
@@ -259,6 +269,10 @@ gsettings set org.gnome.desktop.peripherals.touchpad click-method "areas"
 #themes and fonts
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 gsettings set org.gnome.desktop.interface monospace-font-name "CaskaydiaCove Nerd Font Book 10"
+gsettings set org.gnome.desktop.interface font-name "Liberation Sans 11"
+gsettings set org.gnome.desktop.interface document-font-name "Liberation Sans 11"
+gsettings set org.gnome.desktop.wm.preferences titlebar-font "Liberation Sans Bold 11"
+#add more font changes
 
 #top bar
 gsettings set org.gnome.desktop.interface show-battery-percentage true
@@ -274,9 +288,7 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 #configure programs
 
 #mpv
-wget -P $HOME/.config/mpv https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/mpv/input.conf https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/mpv/mpv.conf
-
-https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/vscode/settings.json
+wget -P $HOME/.config/mpv https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/input.conf https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/mpv.conf
 mv input.conf mpv.conf $HOME/.config/mpv
 wget https://github.com/bloc97/Anime4K/releases/download/3.1/Anime4K_v3.1.zip
 mkdir $HOME/.config/mpv/shaders
@@ -286,16 +298,21 @@ rm Anime4K_v3.1.zip
 #vscode or vscodium
 if [ $vscode == 1 ]
 then
-wget -P $HOME/.config/Code/User https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/vscode/settings.json
+wget -P $HOME/.config/Code/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscode/settings.json
 else
 #might not work, need to test
-wget -P $HOME/.config/Codium/User https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/vscodium/settings.json
+wget -P $HOME/.config/Codium/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscodium/settings.json
 fi
 
 #shell
 chsh -s $(which zsh) #change default shell to zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" #install oh-my-zsh
 git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k #install powerlevel10k
-wget -P $HOME https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/zsh/.zshrc \ 
-https://github.com/Pie247/Fedora-Initial-Setup-Script/blob/main/configs/zsh/.p10k.zsh #download configs
+wget -P $HOME https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.zshrc \ 
+https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.p10k.zsh #download configs
+
+#vim
+wget -P $HOME/.vimrc https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vim/.vimrc
+
+#emacs
 
