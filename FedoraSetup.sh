@@ -1,10 +1,18 @@
 #!/bin/bash
-cd /$HOME
+
 passwd -l root #lock root password
 
 #user prompts
 
 #repo prompts
+
+homeDir='a'
+sureHome='N'
+until [ $sureHome == 'y' ] || [ $sureHome == 'Y' ]
+do
+    read -p "Please enter the name of your home directory: " firstHome
+    read -p "Are you sure? [y\N]" sureHome
+done
 
 nonfree='a'
 until [ $nonfree == 'y' ] || [ $nonfree == 'Y' ] || [ $nonfree == 'n' ] || [ $nonfree == 'N' ]
@@ -32,7 +40,7 @@ then
     do
         read -p "Install Rust? [y/N]: " rust
     done
-
+    
     openjdk='a'
     until [ $openjdk == 'y' ] || [ $openjdk == 'Y' ] || [ $openjdk == 'n' ] || [ $openjdk == 'N' ]
     do
@@ -56,7 +64,7 @@ then
     do
         read -p "Install Ruby? [y/N]: " ruby
     done
-
+    
 fi
 
 #development tool prompts
@@ -85,7 +93,7 @@ dnf upgrade -y
 #remove unneeded programs
 dnf remove -y totem totem-plugins #gnome videos
 dnf remove -y cheese
-rm -r $HOME/.config/totem
+rm -r $homeDir/.config/totem
 
 
 #add repos
@@ -155,8 +163,8 @@ then
     chmod 744 temp.sh
     ./temp.sh -y
     rm temp.sh
-    source $HOME/.cargo/env
-
+    source $homeDir/.cargo/env
+    
     dnf install -y java-latest-openjdk-devel
     dnf install -y dotnet-sdk
     dnf install -y golang
@@ -169,10 +177,10 @@ then
     chmod 744 temp.sh
     ./temp.sh -y
     rm temp.sh
-    source $HOME/.cargo/env
+    source $homeDir/.cargo/env
 fi
 
-if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
+if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
 then
     dnf install -y java-latest-openjdk-devel
 fi
@@ -203,11 +211,11 @@ dnf install -y lsd
 pythonVersion="3.9"
 pip install wheel
 pip install powerline-status
-mkdir $HOME/.config/powerline
-mkdir $HOME/.local/lib/python$pythonVersion/site-packages/scripts
-cp $HOME/.local/bin/powerline-config $HOME/.config/powerline
-cp $HOME/.local/bin/powerline-config $HOME/.local/lib/python$pythonVersion/site-packages/scripts
-cp $HOME/.local/bin/powerline-config $HOME/.cargo/bin
+mkdir $homeDir/.config/powerline
+mkdir $homeDir/.local/lib/python$pythonVersion/site-packages/scripts
+cp $homeDir/.local/bin/powerline-config $homeDir/.config/powerline
+cp $homeDir/.local/bin/powerline-config $homeDir/.local/lib/python$pythonVersion/site-packages/scripts
+cp $homeDir/.local/bin/powerline-config $homeDir/.cargo/bin
 
 if [ $vscode == 1 ]
 then
@@ -243,10 +251,10 @@ dnf install -y vlc
 dnf install -y qbittorrent
 dnf install -y evolution
 dnf install -y piper
-flatpak install -y flathub org.raspberrypi.rpi-imager 
+flatpak install -y flathub org.raspberrypi.rpi-imager
 dnf install -y gnome-shell-extension-gsconnect
 dnf install -y gnome-tweaks
-dnf install -y gnome-extensions-app 
+dnf install -y gnome-extensions-app
 
 if [ $nonfree == 'y' ] || [ $nonfree == 'y' ]
 then
@@ -259,26 +267,26 @@ fi
 
 #install fonts
 nerdfontsVersion="v2.1.0"
-mkdir "$HOME/.fonts"
-mkdir "$HOME/.fonts/Cascadia Code"
+mkdir "$homeDir/.fonts"
+mkdir "$homeDir/.fonts/Cascadia Code"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/$nerdfontsVersion/CascadiaCode.zip
-unzip "CascadiaCode.zip" -d "$HOME/.fonts/Cascadia Code"
+unzip "CascadiaCode.zip" -d "$homeDir/.fonts/Cascadia Code"
 rm "CascadiaCode.zip"
-cd "$HOME/.fonts/Cascadia Code/"
+cd "$homeDir/.fonts/Cascadia Code/"
 rm *Windows*
-mkdir "$HOME/.fonts/IBM Plex Mono"
+mkdir "$homeDir/.fonts/IBM Plex Mono"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/$nerdfontsVersion/IBMPlexMono.zip
 rm "IBMPlexMono.zip"
-cd "$HOME/.fonts/IBM Plex Mono/"
+cd "$homeDir/.fonts/IBM Plex Mono/"
 rm *Windows*
-unzip "IBMPlexMono.zip" -d "$HOME/.fonts/IBM Plex Mono"
-mkdir "$HOME/.fonts/JetBrains Mono"
+unzip "IBMPlexMono.zip" -d "$homeDir/.fonts/IBM Plex Mono"
+mkdir "$homeDir/.fonts/JetBrains Mono"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/$nerdfontsVersion/JetBrainsMono.zip
-unzip "JetBrainsMono.zip" -d "$HOME/.fonts/JetBrains Mono"
+unzip "JetBrainsMono.zip" -d "$homeDir/.fonts/JetBrains Mono"
 rm "JetBrainsMono.zip"
-cd "$HOME/.fonts/JetBrains Mono/"
+cd "$homeDir/.fonts/JetBrains Mono/"
 rm *Windows*
-cd $HOME
+cd $homeDir
 
 #configure gnome
 
@@ -318,31 +326,31 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 #configure programs
 
 #mpv
-wget -P $HOME/.config/mpv https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/input.conf https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/mpv.conf
-mv input.conf mpv.conf $HOME/.config/mpv
+wget -P $homeDir/.config/mpv https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/input.conf https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/mpv.conf
+mv input.conf mpv.conf $homeDir/.config/mpv
 wget https://github.com/bloc97/Anime4K/releases/download/3.1/Anime4K_v3.1.zip
-mkdir $HOME/.config/mpv/shaders
-unzip Anime4K_v3.1.zip -d $HOME/.config/mpv/shaders
+mkdir $homeDir/.config/mpv/shaders
+unzip Anime4K_v3.1.zip -d $homeDir/.config/mpv/shaders
 rm Anime4K_v3.1.zip
 
 #vscode or vscodium
 if [ $vscode == 1 ]
 then
-wget -P $HOME/.config/Code/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscode/settings.json
+    wget -P $homeDir/.config/Code/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscode/settings.json
 else
-#might not work, need to test
-wget -P $HOME/.config/Codium/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscodium/settings.json
+    #might not work, need to test
+    wget -P $homeDir/.config/Codium/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscodium/settings.json
 fi
 
 #shell
 chsh -s $(which zsh) #change default shell to zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" #install oh-my-zsh
 git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k #install powerlevel10k
-wget -P $HOME https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.zshrc \ 
+wget -P $homeDir https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.zshrc \
 https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.p10k.zsh #download configs
 
 #vim
-wget -P $HOME/.vimrc https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vim/.vimrc
+wget -P $homeDir/.vimrc https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vim/.vimrc
 
 #emacs
 
