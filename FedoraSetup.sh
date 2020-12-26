@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /$HOME
-
+passwd -l root #lock root password
 
 #user prompts
 
@@ -32,6 +32,12 @@ then
     do
         read -p "Install Rust? [y/N]: " rust
     done
+
+    openjdk='a'
+    until [ $openjdk == 'y' ] || [ $openjdk == 'Y' ] || [ $openjdk == 'n' ] || [ $openjdk == 'N' ]
+    do
+        read -p "Install OpenJDK? [y/N]: " openjdk
+    done
     
     dotnet='a'
     until [ $dotnet == 'y' ] || [ $dotnet == 'Y' ] || [ $dotnet == 'n' ] || [ $dotnet == 'N' ]
@@ -50,6 +56,7 @@ then
     do
         read -p "Install Ruby? [y/N]: " ruby
     done
+
 fi
 
 #development tool prompts
@@ -109,6 +116,21 @@ else
     printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=gitlab.com_paulcarroty_vscodium_repo\nbaseurl=https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | sudo tee -a /etc/yum.repos.d/vscodium.repo
 fi
 
+#OpenJDk
+if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
+then
+    #AdoptOpenJDK for LTS
+    cat <<'EOF' > /etc/yum.repos.d/adoptopenjdk.repo
+    [AdoptOpenJDK]
+    name=AdoptOpenJDK
+    baseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/fedora/$releasever/$basearch
+    enabled=1
+    gpgcheck=1
+    gpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public
+EOF
+fi
+
+
 #.NET Core SDK
 if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
 then
@@ -134,7 +156,8 @@ then
     ./temp.sh -y
     rm temp.sh
     source $HOME/.cargo/env
-    
+
+    dnf install -y java-latest-openjdk-devel
     dnf install -y dotnet-sdk
     dnf install -y golang
     dnf install -y ruby-devel
@@ -147,6 +170,11 @@ then
     ./temp.sh -y
     rm temp.sh
     source $HOME/.cargo/env
+fi
+
+if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
+then
+    dnf install -y java-latest-openjdk-devel
 fi
 
 if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
@@ -165,6 +193,7 @@ fi
 dnf install -y @development-tools
 dnf install -y vim
 dnf install -y emacs
+dnf install -y arduino
 #emacs plugins go here
 #shell
 dnf install -y zsh
@@ -213,6 +242,7 @@ dnf install -y mpv
 dnf install -y vlc
 dnf install -y qbittorrent
 dnf install -y evolution
+dnf install -y piper
 flatpak install -y flathub org.raspberrypi.rpi-imager 
 dnf install -y gnome-shell-extension-gsconnect
 dnf install -y gnome-tweaks
