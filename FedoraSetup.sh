@@ -4,16 +4,20 @@ passwd -l root #lock root password
 
 #user prompts
 
-#repo prompts
+computerType = 4
+until [ $computerType = 1 ] || [ $computerType == 2 ]
+do
+    read -p "Enter 1 if this is a laptop or 2 if this is a desktop: " computerType
 
 homeDir='a'
 sureHome='N'
 until [ $sureHome == 'y' ] || [ $sureHome == 'Y' ]
 do
-    read -p "Please enter the name of your home directory: " firstHome
+    read -p "Enter the name of your home directory: " firstHome
     read -p "Are you sure? [y\N]" sureHome
 done
 
+#repo prompts 
 nonfree='a'
 until [ $nonfree == 'y' ] || [ $nonfree == 'Y' ] || [ $nonfree == 'n' ] || [ $nonfree == 'N' ]
 do
@@ -296,9 +300,12 @@ cd $homeDir
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
 #power
+if [ $computerType == 2]
+then
 gsettings set org.gnome.desktop.session idle-delay "uint32 0"
-#gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
-#gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 3600
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 3600
+fi
 
 #keyboard and mouse
 gsettings set org.gnome.desktop.peripherals.mouse accel-profile "flat"
