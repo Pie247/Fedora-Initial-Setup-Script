@@ -128,18 +128,11 @@ else
     printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=gitlab.com_paulcarroty_vscodium_repo\nbaseurl=https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg" | sudo tee -a /etc/yum.repos.d/vscodium.repo
 fi
 
-#OpenJDk
+#OpenJDK
 if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
 then
     #AdoptOpenJDK for LTS
-    cat <<'EOF' > /etc/yum.repos.d/adoptopenjdk.repo
-    [AdoptOpenJDK]
-    name=AdoptOpenJDK
-    baseurl=http://adoptopenjdk.jfrog.io/adoptopenjdk/rpm/fedora/$releasever/$basearch
-    enabled=1
-    gpgcheck=1
-    gpgkey=https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public
-EOF
+    wget -P /etc/yum.repos.d/ https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/openjdk/adoptopenjdk.repo
 fi
 
 
@@ -237,7 +230,7 @@ fi
 jboxVer=1.18.7609
 if [ $nonfree == 'y' ] || [ $nonfree == 'Y' ]
 then
-    wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-$jboxVer.tar.gz
+    wget -p $homeDir https://download.jetbrains.com/toolbox/jetbrains-toolbox-$jboxVer.tar.gz
     tar -zxvf jetbrains-toolbox-$jboxVer.tar.gz
     rm jetbrains-toolbox-$jboxVer.tar.gz
     ./jetbrains-toolbox-$jboxVer/jetbrains-toolbox
