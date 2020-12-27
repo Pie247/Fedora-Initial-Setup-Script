@@ -4,7 +4,7 @@ passwd -l root #lock root password
 
 #user prompts
 
-computerType = 4
+computerType=4
 until [ $computerType == 1 ] || [ $computerType == 2 ]
 do
     read -p "Enter 1 if this is a laptop or 2 if this is a desktop: " computerType
