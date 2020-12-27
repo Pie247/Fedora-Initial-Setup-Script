@@ -72,7 +72,7 @@ then
 fi
 
 #development tool prompts
-if [ $nonfree == 1 ]
+if [ $nonfree == 'y' ] || [ $nonfree == "Y"]
 then
     vscode='a'
     until [ $vscode == 1 ] || [ $vscode == 2 ]
