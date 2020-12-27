@@ -14,7 +14,7 @@ sureHome='N'
 until [ $sureHome == 'y' ] || [ $sureHome == 'Y' ]
 do
     read -p "Enter the absolute path to your home directory: " firstHome
-    read -p "Are you sure? [y\N]" sureHome
+    read -p "Are you sure? [y\N]: " sureHome
 done
 
 #repo prompts
@@ -34,7 +34,7 @@ done
 languages='a'
 until [ $languages == 'y' ] || [ $languages == 'Y' ] || [ $languages == 'n' ] || [ $languages == 'N' ]
 do
-    read -p "Install all available programming languages? [y\N]" languages
+    read -p "Install all available programming languages? [y\N]: " languages
 done
 
 if [ $languages == 'n' ] || [ $languages == 'N' ]
@@ -86,7 +86,7 @@ fi
 powershell='a'
 until [ $powershell == 'y' ] || [ $powershell == 'Y' ] || [ $powershell == 'n' ] || [ $powershell == 'N' ]
 do
-    read -p "Install PowerShell? [y/N]" powershell
+    read -p "Install PowerShell? [y/N]: " powershell
 done
 
 
