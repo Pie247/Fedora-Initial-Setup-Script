@@ -13,7 +13,7 @@ homeDir='a'
 sureHome='N'
 until [ $sureHome == 'y' ] || [ $sureHome == 'Y' ]
 do
-    read -p "Enter the name of your home directory: " firstHome
+    read -p "Enter the absolute path to your home directory: " firstHome
     read -p "Are you sure? [y\N]" sureHome
 done
 
