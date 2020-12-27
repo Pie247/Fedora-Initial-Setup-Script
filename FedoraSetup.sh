@@ -166,32 +166,36 @@ then
     dnf install -y dotnet-sdk
     dnf install -y golang
     dnf install -y ruby-devel
-fi
+else
+    if [ $rust == 'y' ] || [ $rust == 'Y' ]
+    then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o temp.sh
+        chmod 744 temp.sh
+        ./temp.sh -y
+        rm temp.sh
+        source $homeDir/.cargo/env
+    fi
+    
+    if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
+    then
+        dnf install -y java-latest-openjdk-devel
+    fi
+    
+    if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
+    then
+        dnf install -y dotnet-sdk
+    fi
+    
+    if [ $golang == 'y' ] || [ $golang == 'Y' ]
+    then
+        dnf install -y golang
+    fi
 
-if [ $rust == 'y' ] || [ $rust == 'Y' ]
-then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o temp.sh
-    chmod 744 temp.sh
-    ./temp.sh -y
-    rm temp.sh
-    source $homeDir/.cargo/env
+    if [ $ruby == 'y' ] || [ $ruby == 'Y' ]
+    then
+        dnf install -y ruby-devel
+    fi
 fi
-
-if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
-then
-    dnf install -y java-latest-openjdk-devel
-fi
-
-if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
-then
-    dnf install -y dotnet-sdk
-fi
-
-if [ $golang == 'y' ] || [ $golang == 'Y' ]
-then
-    dnf install -y golang
-fi
-
 
 
 #install development tools
@@ -230,7 +234,7 @@ fi
 jboxVer=1.18.7609
 if [ $nonfree == 'y' ] || [ $nonfree == 'Y' ]
 then
-    wget -p $homeDir https://download.jetbrains.com/toolbox/jetbrains-toolbox-$jboxVer.tar.gz
+    wget -P $homeDir https://download.jetbrains.com/toolbox/jetbrains-toolbox-$jboxVer.tar.gz
     tar -zxvf jetbrains-toolbox-$jboxVer.tar.gz
     rm jetbrains-toolbox-$jboxVer.tar.gz
     ./jetbrains-toolbox-$jboxVer/jetbrains-toolbox
