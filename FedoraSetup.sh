@@ -5,10 +5,10 @@ passwd -l root #lock root password
 #user prompts
 
 computerType = 4
-until [ $computerType = 1 ] || [ $computerType == 2 ]
+until [ $computerType == 1 ] || [ $computerType == 2 ]
 do
     read -p "Enter 1 if this is a laptop or 2 if this is a desktop: " computerType
-
+done
 homeDir='a'
 sureHome='N'
 until [ $sureHome == 'y' ] || [ $sureHome == 'Y' ]
@@ -17,7 +17,7 @@ do
     read -p "Are you sure? [y\N]" sureHome
 done
 
-#repo prompts 
+#repo prompts
 nonfree='a'
 until [ $nonfree == 'y' ] || [ $nonfree == 'Y' ] || [ $nonfree == 'n' ] || [ $nonfree == 'N' ]
 do
@@ -302,9 +302,9 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 #power
 if [ $computerType == 2]
 then
-gsettings set org.gnome.desktop.session idle-delay "uint32 0"
-gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
-gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 3600
+    gsettings set org.gnome.desktop.session idle-delay "uint32 0"
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 3600
 fi
 
 #keyboard and mouse
