@@ -212,15 +212,6 @@ dnf install -y zsh
 dnf install -y util-linux-user #needed to change shell to zsh
 dnf install -y lsd
 
-pythonVersion="3.9"
-pip install wheel
-pip install powerline-status
-mkdir $homeDir/.config/powerline
-mkdir $homeDir/.local/lib/python$pythonVersion/site-packages/scripts
-cp $homeDir/.local/bin/powerline-config $homeDir/.config/powerline
-cp $homeDir/.local/bin/powerline-config $homeDir/.local/lib/python$pythonVersion/site-packages/scripts
-cp $homeDir/.local/bin/powerline-config $homeDir/.cargo/bin
-
 if [ $vscode == 1 ]
 then
     dnf install -y code
@@ -351,7 +342,7 @@ fi
 
 #shell
 chsh -s $(which zsh) $username #change default shell to zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" #install oh-my-zsh
+curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh #install oh-my-zsh
 git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k #install powerlevel10k
 wget -P $homeDir https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.zshrc \
 https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.p10k.zsh #download configs
