@@ -259,7 +259,6 @@ then
 fi
 
 
-
 #install fonts
 nerdfontsVersion="v2.1.0"
 mkdir "$homeDir/.fonts"
@@ -288,30 +287,30 @@ cd $homeDir
 #desktop
 
 #display
-gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+sudo -u $username gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
 #power
 if [ $computerType == 2]
 then
-    gsettings set org.gnome.desktop.session idle-delay "uint32 0"
-    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
-    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 3600
+   sudo -u $username gsettings set org.gnome.desktop.session idle-delay "uint32 0"
+   sudo -u $username gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
+   sudo -u $username gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 3600
 fi
 
 #keyboard and mouse
-gsettings set org.gnome.desktop.peripherals.mouse accel-profile "flat"
-gsettings set org.gnome.desktop.peripherals.touchpad click-method "areas"
+sudo -u $username gsettings set org.gnome.desktop.peripherals.mouse accel-profile "flat"
+sudo -u $username gsettings set org.gnome.desktop.peripherals.touchpad click-method "areas"
 
 #themes and fonts
-gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
-gsettings set org.gnome.desktop.interface monospace-font-name "CaskaydiaCove Nerd Font Book 10"
-gsettings set org.gnome.desktop.interface font-name "Liberation Sans 11"
-gsettings set org.gnome.desktop.interface document-font-name "Liberation Sans 11"
-gsettings set org.gnome.desktop.wm.preferences titlebar-font "Liberation Sans Bold 11"
+sudo -u $username gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+sudo -u $username gsettings set org.gnome.desktop.interface monospace-font-name "CaskaydiaCove Nerd Font Book 10"
+sudo -u $username gsettings set org.gnome.desktop.interface font-name "Liberation Sans 11"
+sudo -u $username gsettings set org.gnome.desktop.interface document-font-name "Liberation Sans 11"
+sudo -u $username gsettings set org.gnome.desktop.wm.preferences titlebar-font "Liberation Sans Bold 11"
 #add more font changes
 
 #top bar
-gsettings set org.gnome.desktop.interface show-battery-percentage true
+sudo -u $username gsettings set org.gnome.desktop.interface show-battery-percentage true
 
 #favorites (unsure how)
 
