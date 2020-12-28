@@ -193,7 +193,7 @@ else
     then
         dnf install -y golang
     fi
-
+    
     if [ $ruby == 'y' ] || [ $ruby == 'Y' ]
     then
         dnf install -y ruby-devel
@@ -234,7 +234,7 @@ then
 fi
 
 
-jboxVer=1.18.7609
+jboxVer=1.19.7784
 if [ $nonfree == 'y' ] || [ $nonfree == 'Y' ]
 then
     wget -P $homeDir https://download.jetbrains.com/toolbox/jetbrains-toolbox-$jboxVer.tar.gz
