@@ -9,13 +9,16 @@ until [ $computerType == 1 ] || [ $computerType == 2 ]
 do
     read -p "Enter 1 if this is a laptop or 2 if this is a desktop: " computerType
 done
-homeDir='a'
-sureHome='N'
-until [ $sureHome == 'y' ] || [ $sureHome == 'Y' ]
+username='a'
+sureUsername='N'
+until [ $sureUsername == 'y' ] || [ $sureUsername == 'Y' ]
 do
-    read -p "Enter the absolute path to your home directory: " firstHome
-    read -p "Are you sure? [y\N]: " sureHome
+    read -p "Enter your username: " username
+    read -p "Are you sure? [y\N]: " sureUsername
 done
+
+homeDir="/home/$username"
+
 
 #repo prompts
 nonfree='a'
@@ -347,7 +350,7 @@ else
 fi
 
 #shell
-chsh -s $(which zsh) #change default shell to zsh
+chsh -s $(which zsh) $username #change default shell to zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" #install oh-my-zsh
 git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k #install powerlevel10k
 wget -P $homeDir https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.zshrc \
