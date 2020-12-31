@@ -46,6 +46,7 @@ then
     dotnet='y'
     golang='y'
     ruby='y'
+    powershell='y'
 else
     rust='a'
     until [ $rust == 'y' ] || [ $rust == 'Y' ] || [ $rust == 'n' ] || [ $rust == 'N' ]
@@ -77,6 +78,12 @@ else
         read -p "Install Ruby? [y/N]: " ruby
     done
     
+    powershell='a'
+    until [ $powershell == 'y' ] || [ $powershell == 'Y' ] || [ $powershell == 'n' ] || [ $powershell == 'N' ]
+    do
+        read -p "Install PowerShell? [y/N]: " powershell
+    done
+    
 fi
 
 #development tool prompts
@@ -91,11 +98,7 @@ else
     vscode=2
 fi
 
-powershell='a'
-until [ $powershell == 'y' ] || [ $powershell == 'Y' ] || [ $powershell == 'n' ] || [ $powershell == 'N' ]
-do
-    read -p "Install PowerShell? [y/N]: " powershell
-done
+
 
 
 dnf upgrade -y
@@ -190,6 +193,11 @@ then
     dnf install -y ruby-devel
 fi
 
+if [ $powershell == 'y' ] || [ $powershell == 'Y' ]
+then
+    dotnet tool install --global PowerShell
+fi
+
 
 #install development tools
 dnf install -y @development-tools
@@ -211,10 +219,7 @@ else
     dnf install -y codium
 fi
 
-if [ $powershell == 'y' ] || [ $powershell == 'Y' ]
-then
-    dotnet tool install --global PowerShell
-fi
+
 
 
 #install misc. programs
