@@ -1,5 +1,20 @@
 #!/bin/bash
 
+rust=$1
+
+
+#install programming languages
+
+#install rust
+if [ $rust == 'y' ] || [ $rust == 'Y' ]
+    then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o temp.sh
+        chmod 744 temp.sh
+        ./temp.sh -y
+        rm temp.sh
+        source $homeDir/.cargo/env
+    fi
+
 #install fonts
 nerdfontsVersion="v2.1.0"
 mkdir "$homeDir/.fonts"
@@ -91,3 +106,4 @@ https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/config
 wget -P $homeDir/.vimrc https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vim/.vimrc
 
 #emacs
+
