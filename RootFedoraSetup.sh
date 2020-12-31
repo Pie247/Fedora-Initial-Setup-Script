@@ -3,7 +3,6 @@
 passwd -l root #lock root password
 
 #user prompts
-
 computerType=4
 until [ $computerType == 1 ] || [ $computerType == 2 ]
 do
@@ -40,8 +39,14 @@ do
     read -p "Install all available programming languages? [y\N]: " languages
 done
 
-if [ $languages == 'n' ] || [ $languages == 'N' ]
+if [ $languages == 'y' ] || [ $languages == 'Y' ]
 then
+    rust='y'
+    openjdk='y'
+    dotnet='y'
+    golang='y'
+    ruby='y'
+else
     rust='a'
     until [ $rust == 'y' ] || [ $rust == 'Y' ] || [ $rust == 'n' ] || [ $rust == 'N' ]
     do
@@ -154,50 +159,35 @@ fi
 
 #install software
 
+
 #install programming languages
-if [ $languages == 'y' ] || [ $languages == 'Y' ]
+if [ $rust == 'y' ] || [ $rust == 'Y' ]
 then
-    
-    #install rust
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o temp.sh
     chmod 744 temp.sh
     ./temp.sh -y
     rm temp.sh
     source $homeDir/.cargo/env
-    
+fi
+
+if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
+then
     dnf install -y java-latest-openjdk-devel
+fi
+
+if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
+then
     dnf install -y dotnet-sdk
+fi
+
+if [ $golang == 'y' ] || [ $golang == 'Y' ]
+then
     dnf install -y golang
+fi
+
+if [ $ruby == 'y' ] || [ $ruby == 'Y' ]
+then
     dnf install -y ruby-devel
-else
-    if [ $rust == 'y' ] || [ $rust == 'Y' ]
-    then
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o temp.sh
-        chmod 744 temp.sh
-        ./temp.sh -y
-        rm temp.sh
-        source $homeDir/.cargo/env
-    fi
-    
-    if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
-    then
-        dnf install -y java-latest-openjdk-devel
-    fi
-    
-    if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
-    then
-        dnf install -y dotnet-sdk
-    fi
-    
-    if [ $golang == 'y' ] || [ $golang == 'Y' ]
-    then
-        dnf install -y golang
-    fi
-    
-    if [ $ruby == 'y' ] || [ $ruby == 'Y' ]
-    then
-        dnf install -y ruby-devel
-    fi
 fi
 
 
@@ -207,6 +197,8 @@ dnf install -y vim
 dnf install -y emacs
 dnf install -y arduino
 #emacs plugins go here
+
+
 #shell
 dnf install -y zsh
 dnf install -y util-linux-user #needed to change shell to zsh
@@ -223,21 +215,6 @@ if [ $powershell == 'y' ] || [ $powershell == 'Y' ]
 then
     dotnet tool install --global PowerShell
 fi
-
-
-jboxVer=1.19.7784
-if [ $nonfree == 'y' ] || [ $nonfree == 'Y' ]
-then
-    wget -P $homeDir https://download.jetbrains.com/toolbox/jetbrains-toolbox-$jboxVer.tar.gz
-    tar -zxvf jetbrains-toolbox-$jboxVer.tar.gz
-    rm jetbrains-toolbox-$jboxVer.tar.gz
-    ./jetbrains-toolbox-$jboxVer/jetbrains-toolbox
-    rm jetbrains-toolbox-$jboxVer/jetbrains-toolbox
-    rmdir jetbrains-toolbox
-fi
-
-#insert python script here to install IDEs through toolbox here
-
 
 
 #install misc. programs
