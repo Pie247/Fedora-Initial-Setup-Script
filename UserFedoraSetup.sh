@@ -1,19 +1,36 @@
 #!/bin/bash
 
-rust=$1
+nonfree=$1
+rust=$2
+powershell=$3
 
 
 #install programming languages
 
 #install rust
 if [ $rust == 'y' ] || [ $rust == 'Y' ]
-    then
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o temp.sh
-        chmod 744 temp.sh
-        ./temp.sh -y
-        rm temp.sh
-        source $homeDir/.cargo/env
-    fi
+then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o temp.sh
+    chmod 744 temp.sh
+    ./temp.sh -y
+    rm temp.sh
+    source $homeDir/.cargo/env
+fi
+
+#install powershell
+if [ $powershell == 'y' ] || [ $powershell == 'Y' ]
+then
+    dotnet tool install --global PowerShell
+fi
+
+
+#install flatpaks
+flatpak install flathub org.raspberrypi.rpi-imager
+if [ $nonfree == 'y' ] || [ $nonfree == 'Y' ]
+then
+    flatpak install -y flathub com.microsoft.Teams
+fi
+
 
 #install fonts
 nerdfontsVersion="v2.1.0"

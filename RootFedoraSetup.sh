@@ -26,12 +26,6 @@ do
     read -p "Install non-free software? [y\N]: " nonfree
 done
 
-flatpak='a'
-until [ $flatpak == 'y' ] || [ $flatpak == 'Y' ] || [ $flatpak == 'n' ] || [ $flatpak == 'N' ]
-do
-    read -p "Enable Flatpak? (contains some non-free software) [y/N]: " flatpak
-done
-
 #programming language prompts
 languages='a'
 until [ $languages == 'y' ] || [ $languages == 'Y' ] || [ $languages == 'n' ] || [ $languages == 'N' ]
@@ -100,7 +94,6 @@ fi
 
 
 
-
 dnf upgrade -y
 
 
@@ -108,7 +101,6 @@ dnf upgrade -y
 #remove unneeded programs
 dnf remove -y totem totem-plugins #gnome videos
 dnf remove -y cheese
-rm -r $homeDir/.config/totem
 
 
 #add repos
@@ -122,10 +114,7 @@ then
 fi
 
 #Flatpak
-if [ $flatpak == 'y' ] || [ $flatpak == 'Y' ]
-then
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-fi
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 if [ $vscode == 1 ]
 then
@@ -143,7 +132,7 @@ fi
 if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
 then
     #AdoptOpenJDK for LTS
-    wget -P /etc/yum.repos.d/ https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/openjdk/adoptopenjdk.repo
+    wget -O /etc/yum.repos.d/adoptopenjdk.repo https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/openjdk/adoptopenjdk.repo
 fi
 
 
@@ -193,10 +182,7 @@ then
     dnf install -y ruby-devel
 fi
 
-if [ $powershell == 'y' ] || [ $powershell == 'Y' ]
-then
-    dotnet tool install --global PowerShell
-fi
+
 
 
 #install development tools
@@ -211,6 +197,7 @@ dnf install -y arduino
 dnf install -y zsh
 dnf install -y util-linux-user #needed to change shell to zsh
 dnf install -y lsd
+dnf install -y tldr
 
 if [ $vscode == 1 ]
 then
@@ -228,7 +215,6 @@ dnf install -y vlc
 dnf install -y qbittorrent
 dnf install -y evolution
 dnf install -y piper
-flatpak install -y flathub org.raspberrypi.rpi-imager
 dnf install -y gnome-shell-extension-gsconnect
 dnf install -y gnome-tweaks
 dnf install -y gnome-extensions-app
@@ -237,8 +223,6 @@ if [ $nonfree == 'y' ] || [ $nonfree == 'y' ]
 then
     dnf install -y steam
     dnf install -y discord
-    flatpak install -y flathub com.microsoft.Teams
 fi
 
-
-
+sudo -u $username ./$homeDir/FedoraInitialSetup/UserFedoraSetup.sh $nonfree $rust $powershell
