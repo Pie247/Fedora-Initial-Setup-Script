@@ -25,7 +25,7 @@ fi
 
 
 #install flatpaks
-flatpak install flathub org.raspberrypi.rpi-imager
+flatpak install -y flathub org.raspberrypi.rpi-imager
 if [ $nonfree == 'y' ] || [ $nonfree == 'Y' ]
 then
     flatpak install -y flathub com.microsoft.Teams
