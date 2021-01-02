@@ -176,9 +176,10 @@ then
     dnf install -y java-latest-openjdk-devel
 fi
 
+dotnetsdkVersion=5.0
 if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
 then
-    dnf install -y dotnet-sdk
+    dnf install -y dotnet-sdk-$dotnetsdkVersion
 fi
 
 if [ $golang == 'y' ] || [ $golang == 'Y' ]
