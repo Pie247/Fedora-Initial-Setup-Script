@@ -235,4 +235,4 @@ then
     dnf install -y discord
 fi
 
-sudo -u $username bash "$homeDir/Fedora-Initial-Setup-Script/UserFedoraSetup.sh" $nonfree $rust $powershell $vscode
+sudo -u $username bash "$homeDir/Fedora-Initial-Setup-Script/UserFedoraSetup.sh" $nonfree $rust $powershell $vscode $username

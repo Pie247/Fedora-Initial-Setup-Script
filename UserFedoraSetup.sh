@@ -4,6 +4,7 @@ nonfree=$1
 rust=$2
 powershell=$3
 vscode=$4
+username=$5
 
 
 #install programming languages
@@ -131,4 +132,4 @@ git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins ${ZSH_CUSTOM:-
 wget -P $HOME https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.zshrc \
 https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.p10k.zsh
 
-chsh $(which zsh)
+chsh -s $(which zsh) $username
