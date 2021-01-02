@@ -3,6 +3,7 @@
 nonfree=$1
 rust=$2
 powershell=$3
+vscode=$4
 
 
 #install programming languages
@@ -63,7 +64,7 @@ cd $HOME
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
 #power
-if [ $computerType == 2]
+if [ $computerType == 2 ]
 then
     gsettings set org.gnome.desktop.session idle-delay "uint32 0"
     gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "suspend"
@@ -97,7 +98,6 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 
 #mpv
 wget -P $HOME/.config/mpv https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/input.conf https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/mpv.conf
-mv input.conf mpv.conf $HOME/.config/mpv
 wget https://github.com/bloc97/Anime4K/releases/download/3.1/Anime4K_v3.1.zip
 mkdir $HOME/.config/mpv/shaders
 unzip Anime4K_v3.1.zip -d $HOME/.config/mpv/shaders
