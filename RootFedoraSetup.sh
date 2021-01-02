@@ -13,7 +13,7 @@ done
 nvidia='a'
 until [ $nvidia == 'y' ] || [ $nvidia == 'Y' ] || [ $nvidia == 'n' ] || [ $nvidia == 'N' ]
 do
-    read -p "Install Nvidia graphics drivers [y\N]: " nvidia 
+    read -p "Install Nvidia graphics drivers [y\N]: " nvidia
 done
 
 username='a'
@@ -81,11 +81,13 @@ else
     done
     
     powershell='a'
-    until [ $powershell == 'y' ] || [ $powershell == 'Y' ] || [ $powershell == 'n' ] || [ $powershell == 'N' ]
-    do
-        read -p "Install PowerShell? [y/N]: " powershell
-    done
-    
+    if [ $dotnet == 'y'] || [ $dotnet == 'Y']
+    then
+        until [ $powershell == 'y' ] || [ $powershell == 'Y' ] || [ $powershell == 'n' ] || [ $powershell == 'N' ]
+        do
+            read -p "Install PowerShell? [y/N]: " powershell
+        done
+    fi
 fi
 
 #development tool prompts
@@ -163,7 +165,7 @@ fi
 
 if [ $nvidia == 'y' ] || [ $nvidia == 'Y' ]
 then
-dnf install -y akmod-nvidia
+    dnf install -y akmod-nvidia
 fi
 
 #install programming languages
