@@ -3,11 +3,19 @@
 passwd -l root #lock root password
 
 #user prompts
+
 computerType=4
 until [ $computerType == 1 ] || [ $computerType == 2 ]
 do
     read -p "Enter 1 if this is a laptop or 2 if this is a desktop: " computerType
 done
+
+nvidia='a'
+until [ $nvidia == 'y' ] || [ $nvidia == 'Y' ] || [ $nvidia == 'n'] || [ $nvidia == 'N' ]
+do
+    read -p "Install Nvidia graphics drivers [y\N]: " nvidia 
+done
+
 username='a'
 sureUsername='N'
 until [ $sureUsername == 'y' ] || [ $sureUsername == 'Y' ]
@@ -150,6 +158,13 @@ fi
 
 
 #install software
+
+#install drivers
+
+if [ $nvidia == 'y'] || [ $nvidia == 'Y']
+then
+dnf install akmod-nvidia
+fi
 
 
 #install programming languages
