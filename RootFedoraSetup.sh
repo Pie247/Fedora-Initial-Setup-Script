@@ -163,7 +163,7 @@ fi
 
 if [ $nvidia == 'y' ] || [ $nvidia == 'Y' ]
 then
-dnf install akmod-nvidia
+dnf install -y akmod-nvidia
 fi
 
 #install programming languages
