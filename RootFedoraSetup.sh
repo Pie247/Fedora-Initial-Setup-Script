@@ -83,7 +83,7 @@ else
     done
 
     powershell='a'
-    if [ $dotnet == 'y'] || [ $dotnet == 'Y' ]
+    if [ $dotnet == 'y' ] || [ $dotnet == 'Y' ]
     then
         until [ $powershell == 'y' ] || [ $powershell == 'Y' ] || [ $powershell == 'n' ] || [ $powershell == 'N' ]
         do
