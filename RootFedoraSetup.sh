@@ -92,7 +92,7 @@ fi
 if [ $nonfree == 'y' ] || [ $nonfree == "Y"]
 then
     vscode='a'
-    until [ $vscode == 1 ] || [ $vscode == 2 ]sudo -u $username ./$homeDir/Fedora-Initial-Setup-Script/UserFedoraSetup.sh
+    until [ $vscode == 1 ] || [ $vscode == 2 ]
     do
         read -p "Install VSCode or VSCodium? [1/2]: " vscode
     done
