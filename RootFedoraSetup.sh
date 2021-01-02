@@ -230,4 +230,4 @@ then
     dnf install -y discord
 fi
 
-sudo -u $username ./$homeDir/FedoraInitialSetup/UserFedoraSetup.sh $nonfree $rust $powershell
+sudo -u $username ./$homeDir/Fedora-Initial-Setup-Script/UserFedoraSetup.sh $nonfree $rust $powershell
