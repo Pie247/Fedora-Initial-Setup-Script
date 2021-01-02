@@ -107,4 +107,3 @@ source $ZSH/oh-my-zsh.sh
 alias ls="lsd"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-. $HOME/.local/lib/python3.9/site-packages/powerline/bindings/zsh/powerline.zsh
