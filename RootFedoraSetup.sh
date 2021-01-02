@@ -161,20 +161,9 @@ fi
 
 #install drivers
 
-if [ $nvidia == 'y'] || [ $nvidia == 'Y']
+if [ $nvidia == 'y' ] || [ $nvidia == 'Y' ]
 then
 dnf install akmod-nvidia
-fi
-
-
-#install programming languages
-if [ $rust == 'y' ] || [ $rust == 'Y' ]
-then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o temp.sh
-    chmod 744 temp.sh
-    ./temp.sh -y
-    rm temp.sh
-    source $homeDir/.cargo/env
 fi
 
 if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
