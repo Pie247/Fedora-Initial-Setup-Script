@@ -123,6 +123,7 @@ wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh #inst
 chmod 744 install.sh
 bash install.sh --unattended --keep-zshrc
 rm install.sh
+sed -i "12s/.*/export ZSH=/home/$username.oh-my-zsh/ $HOME/.zshrc"
 git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k #install powerlevel10k
 #download plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
