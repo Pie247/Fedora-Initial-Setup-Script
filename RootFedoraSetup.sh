@@ -166,6 +166,7 @@ then
 dnf install akmod-nvidia
 fi
 
+#install programming languages
 if [ $openjdk == 'y' ] || [ $openjdk == 'Y' ]
 then
     dnf install -y java-latest-openjdk-devel
