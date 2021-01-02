@@ -62,11 +62,7 @@ else
         read -p "Install OpenJDK? [y/N]: " openjdk
     done
     
-    dotnet='a'
-    until [ $dotnet == 'y' ] || [ $dotnet == 'Y' ] || [ $dotnet == 'n' ] || [ $dotnet == 'N' ]
-    do
-        read -p "Install .NET Core SDK? [y/N]: " dotnet
-    done
+    
     
     golang='a'
     until [ $golang == 'y' ] || [ $golang == 'Y' ] || [ $golang == 'n' ] || [ $golang == 'N' ]
@@ -80,6 +76,12 @@ else
         read -p "Install Ruby? [y/N]: " ruby
     done
     
+    dotnet='a'
+    until [ $dotnet == 'y' ] || [ $dotnet == 'Y' ] || [ $dotnet == 'n' ] || [ $dotnet == 'N' ]
+    do
+        read -p "Install .NET Core SDK? [y/N]: " dotnet
+    done
+
     powershell='a'
     if [ $dotnet == 'y'] || [ $dotnet == 'Y']
     then
