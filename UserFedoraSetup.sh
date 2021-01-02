@@ -121,7 +121,7 @@ wget -P $HOME/.vimrc https://raw.githubusercontent.com/Pie247/Fedora-Initial-Set
 #install oh-my-zsh
 wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh #install oh-my-zsh
 chmod 744 install.sh
-bash install.sh --unattended
+bash install.sh --unattended --keep-zshrc
 rm install.sh
 git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k #install powerlevel10k
 #download plugins
