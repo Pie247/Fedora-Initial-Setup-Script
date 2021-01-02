@@ -14,7 +14,7 @@ then
     chmod 744 temp.sh
     ./temp.sh -y
     rm temp.sh
-    source $homeDir/.cargo/env
+    source $HOME/.cargo/env
 fi
 
 #install powershell
@@ -34,26 +34,26 @@ fi
 
 #install fonts
 nerdfontsVersion="v2.1.0"
-mkdir "$homeDir/.fonts"
-mkdir "$homeDir/.fonts/Cascadia Code"
+mkdir "$HOME/.fonts"
+mkdir "$HOME/.fonts/Cascadia Code"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/$nerdfontsVersion/CascadiaCode.zip
-unzip "CascadiaCode.zip" -d "$homeDir/.fonts/Cascadia Code"
+unzip "CascadiaCode.zip" -d "$HOME/.fonts/Cascadia Code"
 rm "CascadiaCode.zip"
-cd "$homeDir/.fonts/Cascadia Code/"
+cd "$HOME/.fonts/Cascadia Code/"
 rm *Windows*
-mkdir "$homeDir/.fonts/IBM Plex Mono"
+mkdir "$HOME/.fonts/IBM Plex Mono"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/$nerdfontsVersion/IBMPlexMono.zip
 rm "IBMPlexMono.zip"
-cd "$homeDir/.fonts/IBM Plex Mono/"
+cd "$HOME/.fonts/IBM Plex Mono/"
 rm *Windows*
-unzip "IBMPlexMono.zip" -d "$homeDir/.fonts/IBM Plex Mono"
-mkdir "$homeDir/.fonts/JetBrains Mono"
+unzip "IBMPlexMono.zip" -d "$HOME/.fonts/IBM Plex Mono"
+mkdir "$HOME/.fonts/JetBrains Mono"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/$nerdfontsVersion/JetBrainsMono.zip
-unzip "JetBrainsMono.zip" -d "$homeDir/.fonts/JetBrains Mono"
+unzip "JetBrainsMono.zip" -d "$HOME/.fonts/JetBrains Mono"
 rm "JetBrainsMono.zip"
-cd "$homeDir/.fonts/JetBrains Mono/"
+cd "$HOME/.fonts/JetBrains Mono/"
 rm *Windows*
-cd $homeDir
+cd $HOME
 
 #configure gnome
 
@@ -96,31 +96,31 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 #configure programs
 
 #mpv
-wget -P $homeDir/.config/mpv https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/input.conf https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/mpv.conf
-mv input.conf mpv.conf $homeDir/.config/mpv
+wget -P $HOME/.config/mpv https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/input.conf https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/mpv/mpv.conf
+mv input.conf mpv.conf $HOME/.config/mpv
 wget https://github.com/bloc97/Anime4K/releases/download/3.1/Anime4K_v3.1.zip
-mkdir $homeDir/.config/mpv/shaders
-unzip Anime4K_v3.1.zip -d $homeDir/.config/mpv/shaders
+mkdir $HOME/.config/mpv/shaders
+unzip Anime4K_v3.1.zip -d $HOME/.config/mpv/shaders
 rm Anime4K_v3.1.zip
 
 #vscode or vscodium
 if [ $vscode == 1 ]
 then
-    wget -P $homeDir/.config/Code/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscode/settings.json
+    wget -P $HOME/.config/Code/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscode/settings.json
 else
     #might not work, need to test
-    wget -P $homeDir/.config/Codium/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscodium/settings.json
+    wget -P $HOME/.config/Codium/User https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vscodium/settings.json
 fi
 
 #shell
 chsh -s $(which zsh) $username #change default shell to zsh
 curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh #install oh-my-zsh
 git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k #install powerlevel10k
-wget -P $homeDir https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.zshrc \
+wget -P $HOME https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.zshrc \
 https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/zsh/.p10k.zsh #download configs
 
 #vim
-wget -P $homeDir/.vimrc https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vim/.vimrc
+wget -P $HOME/.vimrc https://raw.githubusercontent.com/Pie247/Fedora-Initial-Setup-Script/main/configs/vim/.vimrc
 
 #emacs
 
