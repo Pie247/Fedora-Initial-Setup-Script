@@ -11,7 +11,7 @@ do
 done
 
 nvidia='a'
-until [ $nvidia == 'y' ] || [ $nvidia == 'Y' ] || [ $nvidia == 'n'] || [ $nvidia == 'N' ]
+until [ $nvidia == 'y' ] || [ $nvidia == 'Y' ] || [ $nvidia == 'n' ] || [ $nvidia == 'N' ]
 do
     read -p "Install Nvidia graphics drivers [y\N]: " nvidia 
 done
