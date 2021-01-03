@@ -10,6 +10,12 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/pie247/.oh-my-zsh"
+# Path to .local/bin
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -107,3 +113,4 @@ source $ZSH/oh-my-zsh.sh
 alias ls="lsd"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+. $HOME/.local/lib/python3.9/site-packages/powerline/bindings/zsh/powerline.zsh
